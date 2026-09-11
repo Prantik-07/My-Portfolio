@@ -1,66 +1,61 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import { profile } from "@/data/profile";
-
-function Word({ children, i }) {
-  return (
-    <motion.span
-      initial={{ y: "100%", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block"
-    >
-      {children}
-    </motion.span>
-  );
-}
+import VariableProximity from "@/components/ui/variable-proximity";
 
 export default function Hero() {
   const ref = useRef(null);
+  const nameRef = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section id="top" className="relative overflow-hidden pt-16 sm:pt-20" ref={ref}>
-      <div
-        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full blur-3xl sm:h-96 sm:w-96"
-        style={{ background: "var(--olive-light)" }}
-      />
-      <div className="container relative py-16 sm:py-24">
-        <h1 className="max-w-4xl text-[15vw] font-semibold uppercase leading-[0.92] tracking-tight sm:text-[9vw] lg:text-[7.5rem]">
-          <span className="block overflow-hidden" style={{ color: "var(--olive)" }}>
-            <Word i={0}>{profile.heroHeadline[0]}</Word>
-          </span>
-          <span className="block overflow-hidden" style={{ color: "var(--ink)" }}>
-            <Word i={1}>{profile.heroHeadline[1]}</Word>
-          </span>
-        </h1>
-
+    <section id="top" className="relative flex h-screen flex-col justify-end" ref={ref}>
+      <div className="container relative mb-[20vh] flex flex-col items-center gap-8 py-16 text-center sm:py-24">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-6 max-w-lg text-lg font-medium sm:text-xl"
-          style={{ color: "var(--text)" }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="text-sm font-semibold uppercase tracking-[0.3em] sm:text-base"
+          style={{ color: "color-mix(in srgb, var(--bg) 65%, transparent)" }}
         >
-          {profile.heroSub}
+          Code × Data × Intelligence
         </motion.p>
 
+        <span className="block overflow-hidden">
+          <motion.span
+            ref={nameRef}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="relative inline-block text-[15vw] font-semibold uppercase leading-[0.92] tracking-tight sm:text-[9vw] lg:text-[7.5rem]"
+            style={{ color: "var(--bg)" }}
+          >
+            <VariableProximity
+              label="Prantik"
+              fromFontVariationSettings="'wght' 400, 'opsz' 9"
+              toFontVariationSettings="'wght' 1000, 'opsz' 40"
+              containerRef={nameRef}
+              radius={160}
+              falloff="linear"
+            />
+          </motion.span>
+        </span>
+
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-2 max-w-lg text-sm sm:text-base"
-          style={{ color: "var(--text-soft)" }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-sm font-semibold uppercase tracking-widest sm:text-base"
+          style={{ color: "color-mix(in srgb, var(--bg) 65%, transparent)" }}
         >
-          {profile.tagline}
+          AI/ML Engineer
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-10 flex flex-wrap items-center gap-3"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-3"
         >
           <a
             href="#work"

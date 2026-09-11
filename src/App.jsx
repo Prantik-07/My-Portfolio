@@ -5,6 +5,7 @@ import SmoothScroll from "@/lib/SmoothScroll";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/sections/Marquee";
 import Work from "@/components/sections/Work";
@@ -26,13 +27,25 @@ function App() {
       <AnimatePresence>
         {loading && <LoadingScreen onFinish={() => setLoading(false)} />}
       </AnimatePresence>
+      <ScrollProgress />
       <div className="flex min-h-svh flex-col justify-center items-center">
-        <Navbar />
-        <main>
+        <div
+          className="w-full"
+          style={{
+            background: [
+              "radial-gradient(60% 40% at 50% 100%, color-mix(in srgb, var(--bg) 30%, var(--ink) 70%) 0%, var(--ink) 100%)",
+              "radial-gradient(90% 65% at 50% 88%, color-mix(in srgb, var(--olive) 75%, var(--ink) 25%) 0%, var(--ink) 100%)",
+              "var(--ink)",
+            ].join(", "),
+          }}
+        >
+          <Navbar />
           <Hero />
+        </div>
+        <main>
+          <Statement />
           <Marquee />
           <Work />
-          <Statement />
           <Capabilities />
           <Process />
           <Contact />

@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-4 z-50 mx-auto w-[80%] rounded-2xl border backdrop-blur-xl backdrop-saturate-150"
+      className="sticky top-4 z-50 mx-auto w-[80%] rounded-2xl border-none backdrop-blur-xl backdrop-saturate-150"
       style={{
         borderColor: "color-mix(in srgb, var(--border) 60%, transparent)",
         background: "color-mix(in srgb, var(--card) 55%, transparent)",
