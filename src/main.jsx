@@ -4,6 +4,11 @@ import 'lenis/dist/lenis.css'
 import './index.css'
 import App from './App.jsx'
 
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
+window.scrollTo(0, 0)
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

@@ -22,9 +22,7 @@ function useTotalCommits(username) {
         if (!cancelled && typeof data.total_count === "number") {
           setCommits(data.total_count);
         }
-      } catch {
-        // keep last known value; widget just shows nothing new
-      }
+      } catch {}
     }
 
     fetchCommits();

@@ -1,16 +1,48 @@
-# React + Vite
+# Prantik — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for Prantik, an AI/ML & Automation Engineer. Built as a single-page React app with scroll-driven animations, a live GitHub commit widget, and a smooth-scrolling experience throughout.
 
-Currently, two official plugins are available:
+**Live sections:** Hero → About → Work → Capabilities → Process → Contact
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- **React 19** + **Vite** — app shell and dev/build tooling
+- **Tailwind CSS v4** — styling (CSS-first config via `@theme` in `src/index.css`, no `tailwind.config.js`)
+- **Framer Motion** — entrance transitions, reveals, and UI micro-interactions
+- **GSAP** (`ScrollTrigger`) — pinned/scrubbed scroll animations (hero name roll-out, horizontal project carousel)
+- **Lenis** — smooth scrolling, synced to GSAP's ticker
+- **lucide-react** — icons
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting started
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Other scripts:
+
+```bash
+npm run build    # production build to dist/
+npm run preview  # preview the production build locally
+npm run lint      # run ESLint
+```
+
+## Project structure
+
+```
+src/
+  components/
+    sections/        # Hero, Statement (About), Work, Capabilities, Process, Contact
+    ui/               # small reusable UI primitives (stepper, dock, hover button, etc.)
+    icons/
+  data/               # profile.js, projects.js — all site copy/content lives here
+  lib/                # SmoothScroll (Lenis + GSAP wiring), utils
+```
+
+To update the site's content (name, bio, stats, process steps, projects), edit `src/data/profile.js` and `src/data/projects.js` — the components read from these files rather than hardcoding copy.
+
+## Notes
+
+- Scroll restoration is disabled (`index.html`) so a page reload always starts at the top instead of resuming mid-animation.
+- The GitHub commit counter (`CommitBattery`) calls the public GitHub Search API client-side and refreshes every 5 minutes.

@@ -37,13 +37,10 @@ export default function Hero() {
         },
       });
 
-      // Name rolls out first; the flanking text only starts revealing once
-      // it fully clears (position 1), so both stay perfectly scroll-synced.
       tl.to(nameRollEl, { yPercent: -130, duration: 1, ease: "none" }, 0)
         .to(nameRollEl, { opacity: 0, duration: 0.8, ease: "none" }, 0)
         .to(leftParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
         .to(rightParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
-        // Hold the pin for a beat once the text is fully revealed before releasing scroll.
         .to({}, { duration: 1 });
     }, heroEl);
 
@@ -52,7 +49,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative flex h-screen flex-col justify-end" ref={ref}>
-      <div className="absolute left-5 top-35 z-10 flex flex-col gap-1 sm:left-10">
+      <div className="absolute left-5 top-35 z-10 hidden flex-col gap-1 sm:left-10 sm:flex">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
