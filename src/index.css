@@ -102,3 +102,15 @@ a {
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
+
+.namaste-text {
+  font-family:
+    "Space Grotesk",
+    "Noto Sans Devanagari",
+    "Noto Sans Gurmukhi",
+    "Noto Sans Telugu",
+    "Noto Nastaliq Urdu",
+    sans-serif;
+  color: var(--bg);
+  letter-spacing: normal;
+}

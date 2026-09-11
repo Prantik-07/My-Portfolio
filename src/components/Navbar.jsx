@@ -17,13 +17,13 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b backdrop-blur-md"
+      className="sticky top-0 z-50 border-b backdrop-blur-md w-[80%]"
       style={{
         borderColor: "var(--border)",
         background: "color-mix(in srgb, var(--bg) 85%, transparent)",
       }}
     >
-      <div className="container flex items-center justify-between py-4">
+      <div className="mx-auto flex w-[80%] items-center justify-between py-4">
         <a href="#top" className="font-heading text-lg font-semibold" style={{ color: "var(--ink)" }}>
           {profile.name}
           <span style={{ color: "var(--olive)" }}>.</span>
@@ -82,7 +82,7 @@ export default function Navbar() {
             className="overflow-hidden border-t md:hidden"
             style={{ borderColor: "var(--border)" }}
           >
-            <div className="container flex flex-col gap-1 py-3">
+            <div className="mx-auto flex w-[80%] flex-col gap-1 py-3">
               {links.map((l) => (
                 <a
                   key={l.to}
