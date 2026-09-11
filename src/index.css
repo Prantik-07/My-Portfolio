@@ -14,7 +14,7 @@
   --border: #ddd6ba;
 
   --sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: "IBM Plex Sans Condensed", "Inter", system-ui, sans-serif;
+  --heading: "Bebas Neue", "IBM Plex Sans Condensed", "Inter", system-ui, sans-serif;
 
   font: 16px/1.5 var(--sans);
   color-scheme: light;
@@ -88,19 +88,6 @@ a {
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 28s linear infinite;
 }
 
 .namaste-text {

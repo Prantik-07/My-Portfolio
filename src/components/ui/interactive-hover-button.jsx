@@ -11,7 +11,7 @@ export function InteractiveHoverButton({ children, className, href, ...props }) 
         "group relative inline-block cursor-pointer overflow-hidden rounded-full border p-2 px-6 text-center text-sm font-semibold",
         className
       )}
-      style={{ borderColor: "var(--border)", background: "var(--card)", color: "var(--ink)" }}
+      style={{ border: "none", background: "var(--card)", color: "var(--ink)" }}
       {...props}
     >
       <div className="flex items-center justify-center gap-2">

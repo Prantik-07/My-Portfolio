@@ -6,7 +6,6 @@ import { profile } from "@/data/profile";
 const exploreLinks = [
   { to: "#work", label: "Work" },
   { to: "#about", label: "About" },
-  { to: "#skills", label: "Skills" },
   { to: "#process", label: "Process" },
 ];
 

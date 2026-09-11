@@ -44,7 +44,7 @@ export default function Work() {
     <section
       id="work"
       ref={sectionRef}
-      className="overflow-hidden border-t py-20 sm:py-28"
+      className="overflow-hidden border-t pb-20 pt-10 sm:pb-28 sm:pt-14"
       style={{ borderColor: "var(--border)" }}
     >
       <div className="container">

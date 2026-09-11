@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import GithubIcon from "@/components/icons/GithubIcon";
 
 export default function ProjectCard({ project, index = 0, className = "" }) {
-  const [open, setOpen] = useState(false);
   const words = project.title.split(" ");
   const lastWord = words.pop();
   const leadWords = words.join(" ");
@@ -59,74 +57,57 @@ export default function ProjectCard({ project, index = 0, className = "" }) {
         </div>
       </div>
 
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="mt-8 flex items-center justify-between gap-4 rounded-full border px-6 py-3 text-xs font-semibold uppercase tracking-wide transition-colors hover:border-[var(--olive)]"
-        style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-        aria-expanded={open}
-      >
-        See process + deliverables
-        <span
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-transform"
-          style={{ background: "var(--olive)", color: "var(--bg)", transform: open ? "rotate(180deg)" : "none" }}
-        >
-          <ChevronDown size={14} />
-        </span>
-      </button>
-
-      {open && (
-        <div className="mt-8 grid gap-8 border-t pt-8 sm:grid-cols-2" style={{ borderColor: "var(--border)" }}>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
-              The work
-            </p>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text)" }}>
-              {project.description}
-            </p>
-            <div className="mt-5 flex items-center gap-5">
+      <div className="mt-8 grid gap-8 border-t pt-8 sm:grid-cols-2" style={{ borderColor: "var(--border)" }}>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
+            The work
+          </p>
+          <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text)" }}>
+            {project.description}
+          </p>
+          <div className="mt-5 flex items-center gap-5">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-70"
+              style={{ color: "var(--ink)" }}
+            >
+              <GithubIcon size={14} /> Source
+            </a>
+            {project.homepage && (
               <a
-                href={project.url}
+                href={project.homepage}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-70"
-                style={{ color: "var(--ink)" }}
+                style={{ color: "var(--olive)" }}
               >
-                <GithubIcon size={14} /> Source
+                Live <ArrowUpRight size={14} />
               </a>
-              {project.homepage && (
-                <a
-                  href={project.homepage}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-70"
-                  style={{ color: "var(--olive)" }}
+            )}
+          </div>
+        </div>
+
+        {project.topics?.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
+              Deliverables
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {project.topics.map((topic) => (
+                <span
+                  key={topic}
+                  className="rounded-xl border px-3 py-2.5 text-center text-xs font-medium"
+                  style={{ borderColor: "var(--border)", background: "var(--bg-alt)", color: "var(--text)" }}
                 >
-                  Live <ArrowUpRight size={14} />
-                </a>
-              )}
+                  {topic}
+                </span>
+              ))}
             </div>
           </div>
-
-          {project.topics?.length > 0 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
-                Deliverables
-              </p>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                {project.topics.map((topic) => (
-                  <span
-                    key={topic}
-                    className="rounded-xl border px-3 py-2.5 text-center text-xs font-medium"
-                    style={{ borderColor: "var(--border)", background: "var(--bg-alt)", color: "var(--text)" }}
-                  >
-                    {topic}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

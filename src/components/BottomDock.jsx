@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Home, UserRound, Briefcase, Sparkles, ListChecks, Mail } from "lucide-react";
+import { Home, UserRound, Briefcase, ListChecks, Mail } from "lucide-react";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import GithubIcon from "@/components/icons/GithubIcon";
 import { profile } from "@/data/profile";
@@ -8,12 +9,31 @@ const items = [
   { href: "#top", label: "Top", Icon: Home },
   { href: "#about", label: "About", Icon: UserRound },
   { href: "#work", label: "Work", Icon: Briefcase },
-  { href: "#skills", label: "Skills", Icon: Sparkles },
   { href: "#process", label: "Process", Icon: ListChecks },
   { href: "#contact", label: "Contact", Icon: Mail },
 ];
 
 export default function BottomDock() {
+  const [active, setActive] = useState("top");
+
+  useEffect(() => {
+    const sections = items
+      .map(({ href }) => document.getElementById(href.slice(1)))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div
       initial={{ y: 80, opacity: 0 }}
@@ -31,18 +51,25 @@ export default function BottomDock() {
             "inset 0 1px 0 color-mix(in srgb, var(--bg) 70%, transparent), 0 8px 30px rgba(35, 40, 26, 0.12)",
         }}
       >
-        {items.map(({ href, label, Icon }) => (
-          <DockIcon key={href}>
-            <a
-              href={href}
-              aria-label={label}
-              className="flex h-full w-full items-center justify-center rounded-full transition-colors hover:opacity-70"
-              style={{ color: "var(--ink)" }}
-            >
-              <Icon size={18} />
-            </a>
-          </DockIcon>
-        ))}
+        {items.map(({ href, label, Icon }) => {
+          const isActive = active === href.slice(1);
+          return (
+            <DockIcon key={href}>
+              <a
+                href={href}
+                aria-label={label}
+                aria-current={isActive ? "page" : undefined}
+                className="flex h-full w-full items-center justify-center rounded-full transition-colors hover:opacity-70"
+                style={{
+                  color: isActive ? "var(--olive)" : "var(--ink)",
+                  background: isActive ? "var(--olive-tint)" : "transparent",
+                }}
+              >
+                <Icon size={18} />
+              </a>
+            </DockIcon>
+          );
+        })}
 
         <div className="mx-1 h-8 w-px self-center" style={{ background: "var(--border)" }} />
 

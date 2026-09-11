@@ -8,7 +8,6 @@ import { profile } from "@/data/profile";
 const links = [
   { to: "#work", label: "Work" },
   { to: "#about", label: "About" },
-  { to: "#skills", label: "Skills" },
   { to: "#process", label: "Process" },
 ];
 
@@ -22,7 +21,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -40, opacity: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed left-1/2 top-4 z-50 w-[80%] -translate-x-1/2 rounded-2xl border-none backdrop-blur-xl backdrop-saturate-150"
+      className="fixed left-1/2 top-14 z-40 w-[80%] -translate-x-1/2 rounded-2xl border-none backdrop-blur-xl backdrop-saturate-150"
       style={{
         borderColor: "color-mix(in srgb, var(--border) 60%, transparent)",
         background: "color-mix(in srgb, var(--card) 55%, transparent)",
@@ -31,7 +30,7 @@ export default function Navbar() {
       }}
     >
       <div className="flex w-full items-center justify-between px-5 py-3 sm:px-6">
-        <a href="#top" className="font-heading text-lg font-semibold" style={{ color: "var(--ink)" }}>
+        <a href="#top" className="font-heading text-2xl font-semibold" style={{ color: "var(--ink)" }}>
           {profile.name}
           <span style={{ color: "var(--olive)" }}>.</span>
         </a>

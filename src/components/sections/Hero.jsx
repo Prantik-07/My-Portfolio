@@ -1,17 +1,58 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown } from "lucide-react";
 import VariableProximity from "@/components/ui/variable-proximity";
+import RollInText from "@/components/RollInText";
+import { profile } from "@/data/profile";
 import portrait from "@/assets/p.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const ref = useRef(null);
   const nameRef = useRef(null);
+  const nameRollRef = useRef(null);
+  const leftTextRef = useRef(null);
+  const rightTextRef = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    const heroEl = ref.current;
+    const nameRollEl = nameRollRef.current;
+    if (!heroEl || !nameRollEl) return;
+
+    const ctx = gsap.context(() => {
+      const leftParagraphs = leftTextRef.current?.querySelectorAll("p") ?? [];
+      const rightParagraphs = rightTextRef.current?.querySelectorAll("p") ?? [];
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroEl,
+          start: "top top",
+          end: "+=105%",
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      // Name rolls out first; the flanking text only starts revealing once
+      // it fully clears (position 1), so both stay perfectly scroll-synced.
+      tl.to(nameRollEl, { yPercent: -130, duration: 1, ease: "none" }, 0)
+        .to(nameRollEl, { opacity: 0, duration: 0.8, ease: "none" }, 0)
+        .to(leftParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
+        .to(rightParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
+        // Hold the pin for a beat once the text is fully revealed before releasing scroll.
+        .to({}, { duration: 1 });
+    }, heroEl);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="top" className="relative flex h-screen flex-col justify-end" ref={ref}>
-      <div className="absolute left-5 top-30 z-10 flex flex-col gap-1 sm:left-10">
+      <div className="absolute left-5 top-35 z-10 flex flex-col gap-1 sm:left-10">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -32,6 +73,23 @@ export default function Hero() {
         </motion.p>
       </div>
 
+      <div className="pointer-events-none absolute inset-x-0 top-40 z-10 hidden justify-between px-8 xl:flex xl:px-20">
+        <RollInText
+          ref={leftTextRef}
+          paragraphs={profile.bio.slice(0, 2)}
+          side="left"
+          tone="light"
+          className="pointer-events-auto max-w-[240px]"
+        />
+        <RollInText
+          ref={rightTextRef}
+          paragraphs={profile.bio.slice(2)}
+          side="right"
+          tone="light"
+          className="pointer-events-auto max-w-[240px] text-right"
+        />
+      </div>
+
       <div className="container relative z-10 mb-0 flex flex-col items-center gap-8 pb-9 pt-16 text-center sm:pb-9 sm:pt-24">
         <span className="block overflow-hidden">
           <motion.span
@@ -42,14 +100,16 @@ export default function Hero() {
             className="relative inline-block text-[21.6vw] font-semibold uppercase leading-[0.92] tracking-wide sm:text-[12.96vw] lg:text-[10.8rem]"
             style={{ color: "var(--bg)" }}
           >
-            <VariableProximity
-              label="Prantik."
-              fromFontVariationSettings="'wght' 400, 'opsz' 9"
-              toFontVariationSettings="'wght' 1000, 'opsz' 40"
-              containerRef={nameRef}
-              radius={160}
-              falloff="linear"
-            />
+            <span ref={nameRollRef} style={{ display: "inline-block" }}>
+              <VariableProximity
+                label="Prantik."
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 1000, 'opsz' 40"
+                containerRef={nameRef}
+                radius={160}
+                falloff="linear"
+              />
+            </span>
           </motion.span>
         </span>
       </div>
@@ -81,7 +141,7 @@ export default function Hero() {
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="pointer-events-none absolute bottom-0 left-[53%] z-0 w-auto max-w-[85vw] -translate-x-1/2 object-contain"
-        style={{ height: "90vh" }}
+        style={{ height: "85vh" }}
       />
 
       <motion.div
