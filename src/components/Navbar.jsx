@@ -17,8 +17,12 @@ export default function Navbar() {
   const closeMenu = () => setOpen(false);
 
   return (
-    <header
-      className="sticky top-4 z-50 mx-auto w-[80%] rounded-2xl border-none backdrop-blur-xl backdrop-saturate-150"
+    <motion.header
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -40, opacity: 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed left-1/2 top-4 z-50 w-[80%] -translate-x-1/2 rounded-2xl border-none backdrop-blur-xl backdrop-saturate-150"
       style={{
         borderColor: "color-mix(in srgb, var(--border) 60%, transparent)",
         background: "color-mix(in srgb, var(--card) 55%, transparent)",
@@ -110,6 +114,6 @@ export default function Navbar() {
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

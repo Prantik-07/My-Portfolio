@@ -1,4 +1,6 @@
 import Reveal from "@/components/Reveal";
+import ScrollRevealText from "@/components/ScrollRevealText";
+import { NumberTicker } from "@/components/ui/number-ticker";
 import { profile } from "@/data/profile";
 
 export default function Statement() {
@@ -12,16 +14,15 @@ export default function Statement() {
         </Reveal>
 
         <div className="grid gap-12 lg:grid-cols-[1.3fr_0.9fr]">
-          <Reveal delay={0.05}>
+          <Reveal delay={0.05} className="min-w-0">
             <h2 className="max-w-2xl text-4xl leading-[1.05] sm:text-5xl">
               I build systems that hold up outside the notebook.
             </h2>
-            <div className="mt-8 flex flex-col gap-5">
-              {profile.bio.map((paragraph, i) => (
-                <p key={i} className="max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: "var(--text)" }}>
-                  {paragraph}
-                </p>
-              ))}
+            <div className="mt-8 min-w-0">
+              <ScrollRevealText
+                texts={profile.bio}
+                className="max-w-xl break-words text-base leading-relaxed sm:text-lg"
+              />
             </div>
           </Reveal>
 
@@ -55,7 +56,13 @@ export default function Statement() {
               style={{ background: "var(--card)" }}
             >
               <p className="font-heading text-3xl font-semibold sm:text-4xl" style={{ color: "var(--ink)" }}>
-                {stat.value}
+                {stat.label === "Public repos" ? (
+                  <>
+                    <NumberTicker value={15} />+
+                  </>
+                ) : (
+                  stat.value
+                )}
               </p>
               <p className="mt-1 text-xs uppercase tracking-wide" style={{ color: "var(--text-soft)" }}>
                 {stat.label}

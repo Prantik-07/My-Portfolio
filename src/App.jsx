@@ -3,9 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmoothScroll from "@/lib/SmoothScroll";
 import LoadingScreen from "@/components/LoadingScreen";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
+import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/sections/Marquee";
 import Work from "@/components/sections/Work";
@@ -28,6 +28,7 @@ function App() {
         {loading && <LoadingScreen onFinish={() => setLoading(false)} />}
       </AnimatePresence>
       <ScrollProgress />
+      <SiteNav />
       <div className="flex min-h-svh flex-col justify-center items-center">
         <div
           className="w-full"
@@ -39,7 +40,6 @@ function App() {
             ].join(", "),
           }}
         >
-          <Navbar />
           <Hero />
         </div>
         <main>
