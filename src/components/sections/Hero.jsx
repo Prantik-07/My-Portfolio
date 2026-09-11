@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import VariableProximity from "@/components/ui/variable-proximity";
 
 export default function Hero() {
@@ -67,11 +67,32 @@ export default function Hero() {
               className="flex h-9 w-9 items-center justify-center rounded-full transition-transform group-hover:scale-110"
               style={{ background: "var(--olive-dark)" }}
             >
-              <ArrowRight size={16} />
+              <ArrowDown size={16} />
             </span>
           </a>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
+      >
+        <span
+          className="text-xs font-semibold uppercase tracking-[0.3em]"
+          style={{ color: "color-mix(in srgb, var(--bg) 55%, transparent)" }}
+        >
+          Scroll down
+        </span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          style={{ color: "color-mix(in srgb, var(--bg) 55%, transparent)" }}
+        >
+          <ArrowDown size={16} />
+        </motion.span>
+      </motion.div>
     </section>
   );
 }

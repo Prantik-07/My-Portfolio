@@ -30,10 +30,15 @@ export default function Contact() {
           <a
             href="#top"
             aria-label="Back to top"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors hover:border-[var(--bg)]"
-            style={{ borderColor: "color-mix(in srgb, var(--bg) 30%, transparent)", color: "var(--bg)" }}
+            className="group relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border transition-colors hover:border-[var(--bg)]"
+            style={{ borderColor: "color-mix(in srgb, var(--bg) 30%, transparent)" }}
           >
-            <ArrowUp size={16} />
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+              style={{ background: "var(--bg)" }}
+            />
+            <ArrowUp size={16} className="relative z-10 text-[var(--bg)] transition-colors duration-300 group-hover:text-[var(--olive-dark)]" />
           </a>
         </Reveal>
 
