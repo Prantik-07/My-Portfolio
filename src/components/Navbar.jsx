@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import GithubIcon from "@/components/icons/GithubIcon";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { profile } from "@/data/profile";
 
 const links = [
@@ -53,13 +54,9 @@ export default function Navbar() {
             <GithubIcon size={14} />
             GitHub
           </a>
-          <a
-            href="#contact"
-            className="flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-medium"
-            style={{ background: "var(--olive)", color: "var(--bg)" }}
-          >
-            Get in touch <ArrowUpRight size={13} />
-          </a>
+          <InteractiveHoverButton href="#contact" className="px-4 py-2 text-xs">
+            Get in touch
+          </InteractiveHoverButton>
         </div>
 
         <button
@@ -104,14 +101,9 @@ export default function Navbar() {
               >
                 <GithubIcon size={14} /> GitHub
               </a>
-              <a
-                href="#contact"
-                onClick={closeMenu}
-                className="mt-1 flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium"
-                style={{ background: "var(--olive)", color: "var(--bg)" }}
-              >
-                Get in touch <ArrowUpRight size={14} />
-              </a>
+              <InteractiveHoverButton href="#contact" onClick={closeMenu} className="mt-1 w-full">
+                Get in touch
+              </InteractiveHoverButton>
             </div>
           </motion.nav>
         )}

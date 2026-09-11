@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import GithubIcon from "@/components/icons/GithubIcon";
+import { ArrowRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 function Word({ children, i }) {
@@ -28,17 +27,6 @@ export default function Hero() {
         style={{ background: "var(--olive-light)" }}
       />
       <div className="container relative py-16 sm:py-24">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-widest"
-          style={{ borderColor: "var(--border)", color: "var(--olive-dark)", background: "var(--card)" }}
-        >
-          <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--olive)" }} />
-          {profile.heroKicker}
-        </motion.p>
-
         <h1 className="max-w-4xl text-[15vw] font-semibold uppercase leading-[0.92] tracking-tight sm:text-[9vw] lg:text-[7.5rem]">
           <span className="block overflow-hidden" style={{ color: "var(--olive)" }}>
             <Word i={0}>{profile.heroHeadline[0]}</Word>
@@ -86,23 +74,6 @@ export default function Hero() {
             >
               <ArrowRight size={16} />
             </span>
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 rounded-full border px-6 py-2.5 text-sm font-semibold transition-colors hover:border-[var(--olive)]"
-            style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-          >
-            Get in touch
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            className="ml-1 flex items-center gap-1.5 text-sm font-medium underline decoration-[var(--border)] underline-offset-4 transition-colors hover:decoration-[var(--olive)]"
-            style={{ color: "var(--text)" }}
-          >
-            <GithubIcon size={14} /> @{profile.handle}
-            <ArrowUpRight size={13} />
           </a>
         </motion.div>
       </div>

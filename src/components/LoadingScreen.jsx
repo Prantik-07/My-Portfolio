@@ -10,10 +10,7 @@ const GREETINGS = [
   { lang: "Urdu", text: "نمستے" },
 ];
 
-// Hoisted so this array's identity never changes across renders — WordRotate's
-// rotation effect depends on it, and a fresh array every render (e.g. from an
-// inline `.map()` in JSX) tore down and restarted its interval on every parent
-// re-render, racing it and silently skipping certain words in the cycle.
+
 const WORDS = GREETINGS.map((g) => g.text);
 
 const WORD_DURATION = 500;
@@ -41,9 +38,7 @@ export default function LoadingScreen({ onFinish }) {
   useEffect(() => {
     let cancelled = false;
 
-    // The Indic scripts' webfonts are large and load lazily; explicitly
-    // requesting them and waiting up to 2.5s avoids the rotation cycling
-    // past a word before its font has actually finished downloading.
+  
     const ready = "fonts" in document
       ? Promise.all(FONT_PROBES.map((q) => document.fonts.load(q).catch(() => {})))
       : Promise.resolve();
