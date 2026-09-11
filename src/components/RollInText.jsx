@@ -36,14 +36,10 @@ const RollInText = forwardRef(function RollInText(
         if (typeof forwardedRef === "function") forwardedRef(node);
         else if (forwardedRef) forwardedRef.current = node;
       }}
-      className={className}
+      className={`flex flex-col gap-10 ${className}`}
     >
       {paragraphs.map((text, i) => (
-        <p
-          key={i}
-          className="mb-4 text-sm leading-relaxed last:mb-0 sm:text-base"
-          style={{ color: textColor }}
-        >
+        <p key={i} className="font-detail text-base leading-relaxed tracking-wide sm:text-lg" style={{ color: textColor }}>
           {renderBold(text, boldColor)}
         </p>
       ))}

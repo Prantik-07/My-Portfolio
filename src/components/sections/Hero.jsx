@@ -57,7 +57,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="text-sm font-semibold uppercase tracking-[0.3em] sm:text-base"
+          className="font-detail text-sm font-semibold uppercase tracking-[0.3em] sm:text-base"
           style={{ color: "color-mix(in srgb, var(--bg) 65%, transparent)" }}
         >
           Code × Data × Intelligence
@@ -66,24 +66,24 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-sm font-semibold uppercase tracking-widest sm:text-base"
+          className="font-detail text-base font-semibold uppercase tracking-widest sm:text-lg"
           style={{ color: "color-mix(in srgb, var(--bg) 65%, transparent)" }}
         >
           AI/ML Engineer
         </motion.p>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-40 z-10 hidden justify-between px-8 xl:flex xl:px-20">
+      <div className="pointer-events-none absolute inset-x-0 top-[38%] z-10 mx-auto hidden max-w-5xl justify-between px-8 xl:flex">
         <RollInText
           ref={leftTextRef}
-          paragraphs={profile.bio.slice(0, 2)}
+          paragraphs={profile.bio.slice(0, 1)}
           side="left"
           tone="light"
           className="pointer-events-auto max-w-[240px]"
         />
         <RollInText
           ref={rightTextRef}
-          paragraphs={profile.bio.slice(2)}
+          paragraphs={profile.bio.slice(1)}
           side="right"
           tone="light"
           className="pointer-events-auto max-w-[240px] text-right"

@@ -15,6 +15,7 @@
 
   --sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: "Bebas Neue", "IBM Plex Sans Condensed", "Inter", system-ui, sans-serif;
+  --detail: "Quicksand", var(--sans);
 
   font: 16px/1.5 var(--sans);
   color-scheme: light;
@@ -75,6 +76,10 @@ a {
 
 .font-heading {
   font-family: var(--heading);
+}
+
+.font-detail {
+  font-family: var(--detail);
 }
 
 .hairline {

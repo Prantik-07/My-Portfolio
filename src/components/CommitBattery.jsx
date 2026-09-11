@@ -79,7 +79,7 @@ export default function CommitBattery() {
           </div>
         </div>
 
-        <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-white/70">
+        <span className="font-detail flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-white/70">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/60" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />

@@ -20,7 +20,7 @@ export default function Capabilities() {
     >
       <div className="container">
         <Reveal className="mb-12 max-w-2xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
+          <p className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
             03 — Capabilities
           </p>
           <h2 className="text-4xl sm:text-5xl" style={{ color: "var(--bg)" }}>
@@ -74,7 +74,7 @@ export default function Capabilities() {
             }}
           >
             <span
-              className="text-xs font-semibold uppercase tracking-widest"
+              className="font-detail text-xs font-semibold uppercase tracking-widest"
               style={{ color: "color-mix(in srgb, var(--bg) 55%, transparent)" }}
             >
               Tech stack

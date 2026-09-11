@@ -19,11 +19,17 @@ export default function Contact() {
     <section
       id="contact"
       className="rounded-t-[2.5rem] py-[3.24rem] sm:rounded-t-[3.5rem] sm:py-[4.05rem]"
-      style={{ background: "var(--olive)" }}
+      style={{
+        background: [
+          "radial-gradient(70% 45% at 50% 100%, color-mix(in srgb, var(--olive-light) 25%, var(--olive) 75%) 0%, var(--olive) 60%)",
+          "radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--olive-dark) 55%, var(--olive) 45%) 0%, var(--olive) 100%)",
+          "var(--olive)",
+        ].join(", "),
+      }}
     >
       <div className="container">
         <Reveal className="flex items-start justify-between gap-6">
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
+          <p className="font-detail text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
             05 — Contact
           </p>
           <a
@@ -79,7 +85,7 @@ export default function Contact() {
 
           <Reveal delay={0.15} className="grid grid-cols-2 gap-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
+              <p className="font-detail text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
                 Explore
               </p>
               <nav className="mt-4 flex flex-col gap-2.5">
@@ -91,7 +97,7 @@ export default function Contact() {
               </nav>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
+              <p className="font-detail text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive-light)" }}>
                 Connect
               </p>
               <nav className="mt-4 flex flex-col gap-2.5">
@@ -115,7 +121,7 @@ export default function Contact() {
         <Reveal delay={0.2} className="mt-[3.24rem] sm:mt-[4.05rem]">
           <a
             href="#top"
-            className="block select-none font-heading font-semibold uppercase leading-none tracking-tight"
+            className="block select-none font-heading font-semibold uppercase leading-none tracking-widest"
             style={{ fontSize: "clamp(2.835rem, 11.34vw, 8.91rem)" }}
           >
             {profile.name.split("").map((char, i) => (

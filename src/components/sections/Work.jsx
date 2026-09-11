@@ -32,6 +32,7 @@ export default function Work() {
           end: () => `+=${getDistance()}`,
           scrub: 1,
           pin: true,
+          anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
@@ -51,7 +52,7 @@ export default function Work() {
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p
-              className="mb-3 text-xs font-semibold uppercase tracking-widest"
+              className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest"
               style={{ color: "var(--olive)" }}
             >
               01 — Work

@@ -13,7 +13,7 @@ export default function Statement() {
     >
       <div className="container">
         <Reveal>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive)" }}>
+          <p className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive)" }}>
             02 — whoami.txt
           </p>
         </Reveal>
@@ -25,7 +25,7 @@ export default function Statement() {
             </h2>
             <div className="mt-8 min-w-0">
               <ScrollRevealText
-                texts={profile.bio.map((t) => t.replace(/\*\*/g, ""))}
+                texts={profile.about.map((t) => t.replace(/\*\*/g, ""))}
                 className="max-w-xl break-words text-base leading-relaxed sm:text-lg"
               />
             </div>
@@ -51,7 +51,7 @@ export default function Statement() {
                     stat.value
                   )}
                 </p>
-                <p className="mt-1 text-xs uppercase tracking-wide" style={{ color: "var(--text-soft)" }}>
+                <p className="font-detail mt-1 text-xs uppercase tracking-wide" style={{ color: "var(--text-soft)" }}>
                   {stat.label}
                 </p>
               </Reveal>

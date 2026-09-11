@@ -45,7 +45,7 @@ export default function ProjectCard({ project, index = 0, className = "" }) {
             style={{ background: "var(--ink)" }}
           >
             <span
-              className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide"
+              className="font-detail rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide"
               style={{ background: "color-mix(in srgb, var(--olive) 35%, transparent)", color: "var(--bg)" }}
             >
               {project.language}
@@ -59,7 +59,7 @@ export default function ProjectCard({ project, index = 0, className = "" }) {
 
       <div className="mt-8 grid gap-8 border-t pt-8 sm:grid-cols-2" style={{ borderColor: "var(--border)" }}>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
+          <p className="font-detail text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
             The work
           </p>
           <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text)" }}>
@@ -91,7 +91,7 @@ export default function ProjectCard({ project, index = 0, className = "" }) {
 
         {project.topics?.length > 0 && (
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
+            <p className="font-detail text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-soft)" }}>
               Deliverables
             </p>
             <div className="mt-3 grid grid-cols-2 gap-2">

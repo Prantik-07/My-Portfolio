@@ -7,7 +7,7 @@ export default function Process() {
     <section id="process" className="border-t py-20 sm:py-28" style={{ borderColor: "var(--border)" }}>
       <div className="container">
         <Reveal className="mb-12 max-w-2xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive)" }}>
+          <p className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive)" }}>
             04 — Process
           </p>
           <h2 className="text-4xl sm:text-5xl">How it actually gets built.</h2>

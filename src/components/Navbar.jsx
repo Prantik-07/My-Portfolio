@@ -40,10 +40,15 @@ export default function Navbar() {
             <a
               key={l.to}
               href={l.to}
-              className="text-sm font-medium transition-colors hover:opacity-70"
+              className="group relative text-sm font-medium"
               style={{ color: "#000" }}
             >
               {l.label}
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                style={{ background: "var(--olive)" }}
+              />
             </a>
           ))}
         </nav>

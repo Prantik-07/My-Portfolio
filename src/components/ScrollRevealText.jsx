@@ -22,7 +22,7 @@ export default function ScrollRevealText({ texts, className, style }) {
   const count = paragraphs.length;
 
   return (
-    <div ref={ref} className="flex flex-col gap-5">
+    <div ref={ref} className="flex flex-col gap-10">
       {paragraphs.map((text, pIndex) => {
         const pStart = pIndex / count;
         const pEnd = pStart + 1 / count;

@@ -22,6 +22,7 @@ export default function SmoothScroll({ children }) {
       root
       ref={lenisRef}
       options={{ lerp: 0.1, duration: 1.1, autoRaf: false, smoothWheel: true }}
+      onScroll={ScrollTrigger.update}
     >
       {children}
     </ReactLenis>

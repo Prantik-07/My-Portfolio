@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLenis } from "lenis/react";
 import { profile } from "@/data/profile";
 
 const BAR_HEIGHT = 50;
-const BASELINE = 27;
 const TRACK_INSET = 26;
-const TICKS = Array.from({ length: 51 }, (_, i) => i * 2);
+const BAR_COUNT = 60;
+const BARS_AREA_HEIGHT = 30;
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
   const [now, setNow] = useState(() => new Date());
+
+  const barHeights = useMemo(
+    () => Array.from({ length: BAR_COUNT }, () => 25 + Math.random() * 75),
+    []
+  );
 
   useLenis(({ progress: p }) => {
     setProgress(p);
@@ -48,62 +53,6 @@ export default function ScrollProgress() {
 
       <div className="relative min-w-0 flex-1 select-none">
         <div className="absolute inset-y-0" style={{ left: TRACK_INSET, right: TRACK_INSET }}>
-          <div
-            className="absolute left-0 top-0 z-0"
-            style={{
-              width: `${pct}%`,
-              height: BAR_HEIGHT,
-              background: "color-mix(in srgb, var(--olive) 16%, transparent)",
-            }}
-          />
-
-          <div
-            className="absolute left-0 right-0"
-            style={{
-              top: BASELINE,
-              height: 1,
-              background: "color-mix(in srgb, var(--ink) 16%, transparent)",
-            }}
-          />
-
-          {TICKS.map((t) => {
-            const major = t % 10 === 0;
-            return (
-              <span
-                key={`tick-${t}`}
-                className="absolute"
-                style={{
-                  left: `${t}%`,
-                  top: major ? BASELINE - 12 : BASELINE - 7,
-                  width: 1,
-                  height: major ? 12 : 7,
-                  background: major
-                    ? "var(--text-soft)"
-                    : "color-mix(in srgb, var(--ink) 22%, transparent)",
-                }}
-              />
-            );
-          })}
-
-          {TICKS.filter((t) => t % 10 === 0).map((t) => {
-            const edgeTransform =
-              t === 0 ? "translateX(0)" : t === 100 ? "translateX(-100%)" : "translateX(-50%)";
-            return (
-              <span
-                key={`label-${t}`}
-                className="absolute hidden text-[10px] font-medium tabular-nums sm:block"
-                style={{
-                  left: `${t}%`,
-                  top: BASELINE + 4,
-                  color: "var(--text-soft)",
-                  transform: edgeTransform,
-                }}
-              >
-                {t}
-              </span>
-            );
-          })}
-
           <div className="absolute z-10 -translate-x-1/2" style={{ left: `${pct}%`, top: 6 }}>
             <div
               className="rounded-full px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white shadow-md"
@@ -111,6 +60,28 @@ export default function ScrollProgress() {
             >
               {pct}%
             </div>
+          </div>
+
+          <div
+            className="absolute bottom-0 left-0 right-0 flex items-end gap-[3px]"
+            style={{ height: BARS_AREA_HEIGHT }}
+          >
+            {barHeights.map((h, i) => {
+              const barPct = (i / (barHeights.length - 1)) * 100;
+              const active = barPct <= pct;
+              return (
+                <div
+                  key={i}
+                  className="min-w-[1px] flex-1 rounded-full transition-colors duration-150"
+                  style={{
+                    height: `${h}%`,
+                    background: active
+                      ? "var(--olive)"
+                      : "color-mix(in srgb, var(--ink) 14%, transparent)",
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -124,7 +95,7 @@ export default function ScrollProgress() {
           <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "#3fae5c" }} />
         </span>
         <span
-          className="hidden text-[11px] font-semibold uppercase tracking-widest sm:inline"
+          className="font-detail hidden text-[11px] font-semibold uppercase tracking-widest sm:inline"
           style={{ color: "var(--ink)" }}
         >
           Live

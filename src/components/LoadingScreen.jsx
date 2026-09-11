@@ -83,7 +83,7 @@ export default function LoadingScreen({ onFinish }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
-        className="text-xs font-medium uppercase tracking-[0.3em]"
+        className="font-detail text-xs font-medium uppercase tracking-[0.3em]"
         style={{ color: "var(--olive-light)" }}
       >
         {fontsReady ? GREETINGS[captionIndex].lang : "Loading"}
