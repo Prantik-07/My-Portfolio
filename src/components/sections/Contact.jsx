@@ -116,11 +116,24 @@ export default function Contact() {
         <Reveal delay={0.2} className="mt-[3.24rem] sm:mt-[4.05rem]">
           <a
             href="#top"
-            className="block select-none font-heading font-semibold uppercase leading-none tracking-tight transition-opacity hover:opacity-80"
-            style={{ color: "var(--bg)", fontSize: "clamp(2.835rem, 11.34vw, 8.91rem)" }}
+            className="block select-none font-heading font-semibold uppercase leading-none tracking-tight"
+            style={{ fontSize: "clamp(2.835rem, 11.34vw, 8.91rem)" }}
           >
-            {profile.name}
-            <span style={{ color: "var(--olive-dark)" }}>.</span>
+            {profile.name.split("").map((char, i) => (
+              <span
+                key={i}
+                className="inline-block transition-transform duration-200 ease-out hover:-translate-y-3"
+                style={{ color: "var(--bg)" }}
+              >
+                {char}
+              </span>
+            ))}
+            <span
+              className="inline-block transition-transform duration-200 ease-out hover:-translate-y-3"
+              style={{ color: "var(--olive-dark)" }}
+            >
+              .
+            </span>
           </a>
         </Reveal>
 

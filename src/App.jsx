@@ -34,9 +34,9 @@ function App() {
           className="w-full"
           style={{
             background: [
-              "radial-gradient(60% 40% at 50% 100%, color-mix(in srgb, var(--bg) 30%, var(--ink) 70%) 0%, var(--ink) 100%)",
-              "radial-gradient(90% 65% at 50% 88%, color-mix(in srgb, var(--olive) 75%, var(--ink) 25%) 0%, var(--ink) 100%)",
-              "var(--ink)",
+              "radial-gradient(60% 40% at 50% 100%, color-mix(in srgb, var(--bg) 30%, var(--olive-dark) 70%) 0%, var(--olive-dark) 100%)",
+              "radial-gradient(90% 65% at 50% 88%, color-mix(in srgb, var(--olive) 90%, var(--olive-dark) 10%) 0%, var(--olive-dark) 100%)",
+              "var(--olive-dark)",
             ].join(", "),
           }}
         >

@@ -5,8 +5,8 @@ import "./stepper.css";
 const PALETTE = {
   inactiveBg: "#eee8d4",
   inactiveText: "#83886f",
-  activeBg: "#4a5a23",
-  completeBg: "#4a5a23",
+  activeBg: "#1b3c40",
+  completeBg: "#1b3c40",
 };
 
 export default function Stepper({
