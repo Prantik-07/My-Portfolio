@@ -18,13 +18,15 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b backdrop-blur-md w-[80%]"
+      className="sticky top-4 z-50 mx-auto w-[80%] rounded-2xl border backdrop-blur-xl backdrop-saturate-150"
       style={{
-        borderColor: "var(--border)",
-        background: "color-mix(in srgb, var(--bg) 85%, transparent)",
+        borderColor: "color-mix(in srgb, var(--border) 60%, transparent)",
+        background: "color-mix(in srgb, var(--card) 55%, transparent)",
+        boxShadow:
+          "inset 0 1px 0 color-mix(in srgb, var(--bg) 70%, transparent), 0 8px 30px rgba(35, 40, 26, 0.12)",
       }}
     >
-      <div className="mx-auto flex w-[80%] items-center justify-between py-4">
+      <div className="flex w-full items-center justify-between px-5 py-3 sm:px-6">
         <a href="#top" className="font-heading text-lg font-semibold" style={{ color: "var(--ink)" }}>
           {profile.name}
           <span style={{ color: "var(--olive)" }}>.</span>
@@ -36,7 +38,7 @@ export default function Navbar() {
               key={l.to}
               href={l.to}
               className="text-sm font-medium transition-colors hover:opacity-70"
-              style={{ color: "var(--text)" }}
+              style={{ color: "#000" }}
             >
               {l.label}
             </a>
@@ -77,16 +79,16 @@ export default function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden border-t md:hidden"
-            style={{ borderColor: "var(--border)" }}
+            style={{ borderColor: "color-mix(in srgb, var(--border) 60%, transparent)" }}
           >
-            <div className="mx-auto flex w-[80%] flex-col gap-1 py-3">
+            <div className="flex w-full flex-col gap-1 px-5 py-3 sm:px-6">
               {links.map((l) => (
                 <a
                   key={l.to}
                   href={l.to}
                   onClick={closeMenu}
                   className="rounded-lg px-3 py-2 text-sm font-medium"
-                  style={{ color: "var(--text)" }}
+                  style={{ color: "#000" }}
                 >
                   {l.label}
                 </a>
