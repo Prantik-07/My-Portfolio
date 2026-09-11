@@ -13,6 +13,7 @@ export const profile = {
     "I care about systems that fail safely, explain their decisions, and ship as real, usable software rather than one-off research demos.",
   ],
   github: "https://github.com/Prantik-07",
+  email: "prantik472007@gmail.com",
   avatar: "https://avatars.githubusercontent.com/u/219897174?v=4",
   memberSince: 2025,
   stats: [

@@ -3,7 +3,6 @@ import { AnimatePresence } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmoothScroll from "@/lib/SmoothScroll";
 import LoadingScreen from "@/components/LoadingScreen";
-import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/sections/Hero";
@@ -52,7 +51,6 @@ function App() {
           <Process />
           <Contact />
         </main>
-        <Footer />
       </div>
     </SmoothScroll>
   );

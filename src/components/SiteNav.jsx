@@ -5,6 +5,7 @@ import BottomDock from "@/components/BottomDock";
 
 export default function SiteNav() {
   const [pastHero, setPastHero] = useState(false);
+  const [onContact, setOnContact] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("top");
@@ -17,10 +18,21 @@ export default function SiteNav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+
+    const observer = new IntersectionObserver(([entry]) => setOnContact(entry.isIntersecting), {
+      threshold: 0.1,
+    });
+    observer.observe(contact);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      <AnimatePresence>{!pastHero && <Navbar key="navbar" />}</AnimatePresence>
-      <AnimatePresence>{pastHero && <BottomDock key="dock" />}</AnimatePresence>
+      <AnimatePresence>{!pastHero && !onContact && <Navbar key="navbar" />}</AnimatePresence>
+      <AnimatePresence>{pastHero && !onContact && <BottomDock key="dock" />}</AnimatePresence>
     </>
   );
 }
