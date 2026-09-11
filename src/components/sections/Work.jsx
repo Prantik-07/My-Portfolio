@@ -1,21 +1,52 @@
-import { useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
 
-export default function Work() {
-  const scrollerRef = useRef(null);
-  const [showAll, setShowAll] = useState(false);
+gsap.registerPlugin(ScrollTrigger);
 
-  const scrollBy = (dir) => {
-    scrollerRef.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
-  };
+export default function Work() {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const [showAll, setShowAll] = useState(false);
 
   const visible = showAll ? projects : projects.filter((p) => p.featured);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const getDistance = () => Math.max(0, track.scrollWidth - section.offsetWidth);
+
+    const ctx = gsap.context(() => {
+      gsap.to(track, {
+        x: () => -getDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${getDistance()}`,
+          scrub: 1,
+          pin: true,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [showAll]);
+
   return (
-    <section id="work" className="border-t py-20 sm:py-28" style={{ borderColor: "var(--border)" }}>
+    <section
+      id="work"
+      ref={sectionRef}
+      className="overflow-hidden border-t py-20 sm:py-28"
+      style={{ borderColor: "var(--border)" }}
+    >
       <div className="container">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -27,44 +58,26 @@ export default function Work() {
             </p>
             <h2 className="max-w-xl text-4xl sm:text-5xl">Things I've shipped.</h2>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowAll((v) => !v)}
-              className="flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-semibold transition-colors hover:border-[var(--olive)]"
-              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-            >
-              {showAll ? "Featured only" : "All repos"} <ArrowUpRight size={13} />
-            </button>
-            <button
-              onClick={() => scrollBy(-1)}
-              aria-label="Scroll left"
-              className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:border-[var(--olive)]"
-              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-            >
-              <ArrowLeft size={16} />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              aria-label="Scroll right"
-              className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:border-[var(--olive)]"
-              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
-            >
-              <ArrowRight size={16} />
-            </button>
-          </div>
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-semibold transition-colors hover:border-[var(--olive)]"
+            style={{ borderColor: "var(--border)", color: "var(--ink)" }}
+          >
+            {showAll ? "Featured only" : "All repos"} <ArrowUpRight size={13} />
+          </button>
         </Reveal>
       </div>
 
-      <Reveal delay={0.1}>
-        <div
-          ref={scrollerRef}
-          className="no-scrollbar flex gap-4 overflow-x-auto px-5 pb-4 sm:px-10"
-        >
-          {visible.map((project) => (
-            <ProjectCard key={project.name} project={project} className="w-[320px] flex-none sm:w-[380px]" />
-          ))}
-        </div>
-      </Reveal>
+      <div ref={trackRef} className="flex w-max gap-5 px-5 will-change-transform sm:px-10">
+        {visible.map((project, i) => (
+          <ProjectCard
+            key={project.name}
+            project={project}
+            index={i}
+            className="w-[85vw] max-w-[860px] flex-none"
+          />
+        ))}
+      </div>
     </section>
   );
 }

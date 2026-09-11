@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLenis } from "lenis/react";
 
-const sections = ["top", "about", "work", "skills", "process", "contact"];
+const sections = ["top", "about", "skills", "work", "capabilities", "process", "contact"];
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
