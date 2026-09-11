@@ -73,7 +73,13 @@ export default function LoadingScreen({ onFinish }) {
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6"
-      style={{ background: "var(--olive)" }}
+      style={{
+        background: [
+          "radial-gradient(70% 45% at 50% 100%, color-mix(in srgb, var(--olive-light) 25%, var(--olive) 75%) 0%, var(--olive) 60%)",
+          "radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--olive-dark) 55%, var(--olive) 45%) 0%, var(--olive) 100%)",
+          "var(--olive)",
+        ].join(", "),
+      }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}

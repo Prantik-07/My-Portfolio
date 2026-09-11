@@ -86,7 +86,7 @@ export default function Hero() {
           paragraphs={profile.bio.slice(1)}
           side="right"
           tone="light"
-          className="pointer-events-auto max-w-[240px] text-right"
+          className="pointer-events-auto max-w-[240px] translate-y-[30%] text-right"
         />
       </div>
 
