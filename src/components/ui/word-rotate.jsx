@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 export function WordRotate({
   words,
   duration = 2500,
+  loop = true,
   motionProps = {
     initial: { opacity: 0, y: -50 },
     animate: { opacity: 1, y: 0 },
@@ -16,15 +17,21 @@ export function WordRotate({
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (!loop && index >= words.length - 1) return;
+
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+      setIndex((prevIndex) => {
+        const next = prevIndex + 1;
+        if (next < words.length) return next;
+        return loop ? 0 : prevIndex;
+      });
     }, duration);
 
     return () => clearInterval(interval);
-  }, [words, duration]);
+  }, [words, duration, loop, index]);
 
   return (
-    <div className="overflow-hidden py-2">
+    <div className="overflow-hidden py-4">
       <AnimatePresence mode="wait">
         <motion.h1 key={words[index]} className={cn(className)} {...motionProps}>
           {words[index]}

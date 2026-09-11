@@ -7,7 +7,6 @@ const GREETINGS = [
   { lang: "English", text: "Namaste" },
   { lang: "Punjabi", text: "ਨਮਸਤੇ" },
   { lang: "Telugu", text: "నమస్తే" },
-  { lang: "Urdu", text: "نمستے" },
 ];
 
 
@@ -21,7 +20,6 @@ const FONT_PROBES = [
   '600 1em "Noto Sans Devanagari"',
   '600 1em "Noto Sans Gurmukhi"',
   '600 1em "Noto Sans Telugu"',
-  '600 1em "Noto Nastaliq Urdu"',
 ];
 
 export default function LoadingScreen({ onFinish }) {
@@ -57,7 +55,7 @@ export default function LoadingScreen({ onFinish }) {
     if (!fontsReady) return;
 
     const captionInterval = setInterval(() => {
-      setCaptionIndex((i) => (i + 1) % GREETINGS.length);
+      setCaptionIndex((i) => Math.min(i + 1, GREETINGS.length - 1));
     }, WORD_DURATION);
 
     const finishTimer = setTimeout(() => {
@@ -99,11 +97,12 @@ export default function LoadingScreen({ onFinish }) {
         <WordRotate
           words={WORDS}
           duration={WORD_DURATION}
+          loop={false}
           className="namaste-text text-5xl font-semibold sm:text-7xl"
           motionProps={{
-            initial: { opacity: 0, y: 16 },
-            animate: { opacity: 1, y: 0 },
-            exit: { opacity: 0, y: -16 },
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            exit: { opacity: 0 },
             transition: { duration: 0.15, ease: "easeOut" },
           }}
         />
