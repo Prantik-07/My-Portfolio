@@ -72,7 +72,7 @@ export default function ScrollProgress() {
               return (
                 <div
                   key={i}
-                  className="min-w-[1px] flex-1 rounded-full transition-colors duration-150"
+                  className="min-w-[1px] flex-1 rounded-t-sm transition-colors duration-150"
                   style={{
                     height: `${h}%`,
                     background: active
