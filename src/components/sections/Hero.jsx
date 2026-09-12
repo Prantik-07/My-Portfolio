@@ -23,33 +23,39 @@ export default function Hero() {
     const nameRollEl = nameRollRef.current;
     if (!heroEl || !nameRollEl) return;
 
-    const ctx = gsap.context(() => {
-      const leftParagraphs = leftTextRef.current?.querySelectorAll("p") ?? [];
-      const rightParagraphs = rightTextRef.current?.querySelectorAll("p") ?? [];
+    const mm = gsap.matchMedia();
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroEl,
-          start: "top top",
-          end: "+=105%",
-          scrub: true,
-          pin: true,
-        },
-      });
+    mm.add("(min-width: 640px)", () => {
+      const ctx = gsap.context(() => {
+        const leftParagraphs = leftTextRef.current?.querySelectorAll("p") ?? [];
+        const rightParagraphs = rightTextRef.current?.querySelectorAll("p") ?? [];
 
-      tl.to(nameRollEl, { yPercent: -130, duration: 1, ease: "none" }, 0)
-        .to(nameRollEl, { opacity: 0, duration: 0.8, ease: "none" }, 0)
-        .to(leftParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
-        .to(rightParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
-        .to({}, { duration: 1 });
-    }, heroEl);
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroEl,
+            start: "top top",
+            end: "+=105%",
+            scrub: true,
+            pin: true,
+          },
+        });
 
-    return () => ctx.revert();
+        tl.to(nameRollEl, { yPercent: -130, duration: 1, ease: "none" }, 0)
+          .to(nameRollEl, { opacity: 0, duration: 0.8, ease: "none" }, 0)
+          .to(leftParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
+          .to(rightParagraphs, { opacity: 1, x: 0, duration: 1, ease: "none", stagger: 0.15 }, 1)
+          .to({}, { duration: 1 });
+      }, heroEl);
+
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
-    <section id="top" className="relative flex h-screen flex-col justify-end" ref={ref}>
-      <div className="absolute left-5 top-35 z-10 hidden flex-col gap-1 sm:left-10 sm:flex">
+    <section id="top" className="relative flex h-[80vh] flex-col justify-end sm:h-screen" ref={ref}>
+      <div className="absolute left-5 top-35 z-10 flex flex-col gap-1 sm:left-10">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -94,12 +100,12 @@ export default function Hero() {
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="relative inline-block text-[21.6vw] font-semibold uppercase leading-[0.92] tracking-wide sm:text-[12.96vw] lg:text-[10.8rem]"
+            className="relative inline-block text-[20.8vw] font-semibold uppercase leading-[0.92] tracking-wide sm:text-[12.96vw] lg:text-[10.8rem]"
             style={{ color: "var(--bg)" }}
           >
             <span ref={nameRollRef} style={{ display: "inline-block" }}>
               <VariableProximity
-                label="Prantik."
+                label="Prantik"
                 fromFontVariationSettings="'wght' 400, 'opsz' 9"
                 toFontVariationSettings="'wght' 1000, 'opsz' 40"
                 containerRef={nameRef}
@@ -114,7 +120,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 14 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="absolute right-10 bottom-8 z-10 sm:right-10"
+        className="absolute right-10 bottom-8 z-10 hidden sm:block"
       >
         <a
           href="#work"
@@ -137,8 +143,7 @@ export default function Hero() {
         initial={{ y: 120, opacity: 0 }}
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute bottom-0 left-[53%] z-0 w-auto max-w-[85vw] -translate-x-1/2 object-contain"
-        style={{ height: "85vh" }}
+        className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-auto w-[140vw] -translate-x-1/2 object-contain sm:left-[53%] sm:h-[85vh] sm:w-full"
       />
 
       <motion.div
