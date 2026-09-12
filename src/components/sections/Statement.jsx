@@ -14,7 +14,7 @@ export default function Statement() {
       <div className="container">
         <Reveal>
           <p className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--olive)" }}>
-            02 — whoami.txt
+            01 — whoami.txt
           </p>
         </Reveal>
 

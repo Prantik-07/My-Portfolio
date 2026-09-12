@@ -4,11 +4,28 @@ import { profile } from "@/data/profile";
 
 const TECH_ICON_SLUGS = {
   Python: "python",
-  TypeScript: "typescript",
   JavaScript: "javascript",
+  Java: "openjdk",
+  SQL: "postgresql",
   React: "react",
-  Streamlit: "streamlit",
-  Wagtail: "wagtail",
+  Vite: "vite",
+  HTML: "html5",
+  CSS: "css",
+  "Node.js": "nodedotjs",
+  Express: "express",
+  FastAPI: "fastapi",
+  PyTorch: "pytorch",
+  "scikit-learn": "scikitlearn",
+  Pandas: "pandas",
+  NumPy: "numpy",
+  Git: "git",
+  GitHub: "github",
+  Docker: "docker",
+  WandB: "weightsandbiases",
+  HuggingFace: "huggingface",
+  Kaggle: "kaggle",
+  Postman: "postman",
+  Vercel: "vercel",
 };
 
 export default function Marquee() {
@@ -26,7 +43,7 @@ export default function Marquee() {
 
   return (
     <div
-      className="mx-auto w-[80%] overflow-hidden rounded-2xl border py-4 backdrop-blur-xl backdrop-saturate-150 border-none"
+      className="mx-auto w-[80%] h-[100px] flex items-center justify-center overflow-hidden rounded-2xl border py-4 backdrop-blur-xl backdrop-saturate-150 border-none"
       style={{
         borderColor: "color-mix(in srgb, var(--border) 60%, transparent)",
         background: "color-mix(in srgb, var(--card) 45%, transparent)",

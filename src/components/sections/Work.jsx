@@ -55,7 +55,7 @@ export default function Work() {
               className="font-detail mb-3 text-xs font-semibold uppercase tracking-widest"
               style={{ color: "var(--olive)" }}
             >
-              01 — Work
+              02 — Work
             </p>
             <h2 className="max-w-xl text-4xl sm:text-5xl">Things I've shipped.</h2>
           </div>

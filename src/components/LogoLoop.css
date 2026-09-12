@@ -1,8 +1,8 @@
 .logoloop {
   position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   width: 100%;
+  padding-block: calc(var(--logoloop-logoHeight, 44px) * 0.07);
 }
 
 .logoloop--fade::before,
@@ -66,4 +66,5 @@
 .logoloop--scale-hover .logoloop__item:hover img,
 .logoloop--scale-hover .logoloop__item:hover .logoloop__node {
   transform: scale(1.12);
+  
 }

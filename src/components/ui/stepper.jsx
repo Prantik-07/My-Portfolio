@@ -106,6 +106,7 @@ export default function Stepper({
           currentStep={currentStep}
           direction={direction}
           className={`stepper-content ${contentClassName}`}
+          steps={stepsArray}
         >
           {stepsArray[currentStep - 1]}
         </StepContentWrapper>
@@ -133,19 +134,43 @@ export default function Stepper({
   );
 }
 
-function StepContentWrapper({ isCompleted, currentStep, direction, children, className }) {
-  const [parentHeight, setParentHeight] = useState(0);
+function StepContentWrapper({ isCompleted, currentStep, direction, children, className, steps }) {
+  const [maxHeight, setMaxHeight] = useState(0);
+  const measureRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const container = measureRef.current;
+      if (!container) return;
+      const heights = Array.from(container.children).map((el) => el.offsetHeight);
+      setMaxHeight(Math.max(...heights, 0));
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [steps]);
 
   return (
     <motion.div
       className={className}
       style={{ position: "relative", overflow: "hidden" }}
-      animate={{ height: isCompleted ? 0 : parentHeight }}
+      animate={{ height: isCompleted ? 0 : maxHeight }}
       transition={{ type: "spring", duration: 0.4 }}
     >
+      <div
+        ref={measureRef}
+        aria-hidden="true"
+        style={{ position: "absolute", left: 0, right: 0, top: 0, visibility: "hidden", pointerEvents: "none" }}
+      >
+        {steps.map((step, index) => (
+          <div key={index}>{step}</div>
+        ))}
+      </div>
+
       <AnimatePresence initial={false} mode="sync" custom={direction}>
         {!isCompleted && (
-          <SlideTransition key={currentStep} direction={direction} onHeightReady={(h) => setParentHeight(h)}>
+          <SlideTransition key={currentStep} direction={direction}>
             {children}
           </SlideTransition>
         )}
@@ -154,16 +179,9 @@ function StepContentWrapper({ isCompleted, currentStep, direction, children, cla
   );
 }
 
-function SlideTransition({ children, direction, onHeightReady }) {
-  const containerRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (containerRef.current) onHeightReady(containerRef.current.offsetHeight);
-  }, [children, onHeightReady]);
-
+function SlideTransition({ children, direction }) {
   return (
     <motion.div
-      ref={containerRef}
       custom={direction}
       variants={stepVariants}
       initial="enter"
