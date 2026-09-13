@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "lenis/react";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
@@ -11,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Work() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const triggerRef = useRef(null);
+  const lenis = useLenis();
   const [showAll, setShowAll] = useState(false);
 
   const visible = showAll ? projects : projects.filter((p) => p.featured);
@@ -23,7 +26,7 @@ export default function Work() {
     const getDistance = () => Math.max(0, track.scrollWidth - section.offsetWidth);
 
     const ctx = gsap.context(() => {
-      gsap.to(track, {
+      const tween = gsap.to(track, {
         x: () => -getDistance(),
         ease: "none",
         scrollTrigger: {
@@ -36,10 +39,26 @@ export default function Work() {
           invalidateOnRefresh: true,
         },
       });
+      triggerRef.current = tween.scrollTrigger;
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      triggerRef.current = null;
+    };
   }, [showAll]);
+
+  const handleToggle = () => {
+    const st = triggerRef.current;
+    if (st && window.scrollY > st.start) {
+      if (lenis) {
+        lenis.scrollTo(st.start, { immediate: true });
+      } else {
+        window.scrollTo({ top: st.start });
+      }
+    }
+    setShowAll((v) => !v);
+  };
 
   return (
     <section
@@ -60,7 +79,7 @@ export default function Work() {
             <h2 className="max-w-xl text-4xl sm:text-5xl">Things I've shipped.</h2>
           </div>
           <button
-            onClick={() => setShowAll((v) => !v)}
+            onClick={handleToggle}
             className="flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-semibold transition-colors hover:border-[var(--olive)]"
             style={{ borderColor: "var(--border)", color: "var(--ink)" }}
           >
